@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int shipWithinDays(vector<int>& arr, int days) {
+        int start=0,end=0,mid,ans;
+        for(int i=0;i<arr.size();i++){
+            start=max(start,arr[i]);
+            end+=arr[i];
+        }
+        while(start<=end){
+        mid=end+(start-end)/2;
+        int ship=0, count=1;
+        for(int i=0;i<arr.size();i++){
+            if(ship+arr[i]>mid){
+                count++;
+                ship=arr[i];
+            }else ship+=arr[i];
+        }
+        if(count<=days){
+            ans=mid;
+            end=mid-1;
+        }
+        else
+        start=mid+1;
+        }
+
+        return ans;
+
+        
+    }
+};
